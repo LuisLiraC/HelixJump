@@ -16,7 +16,7 @@ public class Level
 [CreateAssetMenu(fileName = "New Stage")]
 public class Stage : ScriptableObject
 {
-    public Color stageBackgrounColor = Color.white;
+    public Color stageBackgroundColor = Color.white;
     public Color stageLevelPartColor = Color.white;
     public Color stageBallColor = Color.white;
 
