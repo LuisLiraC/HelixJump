@@ -35,7 +35,9 @@ public class GameManager : MonoBehaviour
 
     public void RestartLevel()
     {
-
+        currentScore = 0;
+        UIManager.instance.UpdateScore(currentScore);
+        FindObjectOfType<BallController>().ResetBall();
     }
 
     public void AddScore(int scoreToAdd)
