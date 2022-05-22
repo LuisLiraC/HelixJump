@@ -30,7 +30,9 @@ public class GameManager : MonoBehaviour
 
     public void NextLevel()
     {
-        Debug.Log("Next level");
+        currentLevel++;
+        FindObjectOfType<BallController>().ResetBall();
+        FindObjectOfType<HelixController>().LoadStage(currentLevel);
     }
 
     public void RestartLevel()
@@ -38,6 +40,7 @@ public class GameManager : MonoBehaviour
         currentScore = 0;
         UIManager.instance.UpdateScore(currentScore);
         FindObjectOfType<BallController>().ResetBall();
+        FindObjectOfType<HelixController>().LoadStage(currentLevel);
     }
 
     public void AddScore(int scoreToAdd)
