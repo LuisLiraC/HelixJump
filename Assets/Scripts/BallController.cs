@@ -14,6 +14,8 @@ public class BallController : MonoBehaviour
     {
         if (ignoreNextCollision) return;
 
+        GameManager.instance.AddScore(1);
+
         rb.velocity = Vector3.zero;
         rb.AddForce(Vector3.up * impulseForce, ForceMode.Impulse);
 
