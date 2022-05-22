@@ -10,6 +10,14 @@ public class BallController : MonoBehaviour
     private bool ignoreNextCollision;
     private Vector3 startPosition;
 
+    [HideInInspector]
+    public int perfectPass;
+    public float superSpeed = 0;
+
+    private bool isSuperSpeedActive;
+
+    private int perfectPassCount = 3;
+
     private void Start()
     {
         startPosition = transform.position;
@@ -18,6 +26,11 @@ public class BallController : MonoBehaviour
     private void OnCollisionEnter(Collision collision)
     {
         if (ignoreNextCollision) return;
+
+        if (isSuperSpeedActive && !collision.transform.GetComponent<HelixGoalController>())
+        {
+            Destroy(collision.transform.parent.gameObject, 0.2f);
+        }
 
         DeathZone deatZone = collision.transform.GetComponent<DeathZone>();
 
@@ -31,6 +44,18 @@ public class BallController : MonoBehaviour
 
         ignoreNextCollision = true;
         Invoke("AllowNextCollision", 0.2f);
+
+        perfectPass = 0;
+        isSuperSpeedActive = false;
+    }
+
+    private void Update()
+    {
+        if (perfectPass >= perfectPassCount && !isSuperSpeedActive)
+        {
+            isSuperSpeedActive = true;
+            rb.AddForce(Vector3.down * superSpeed, ForceMode.Impulse);
+        }
     }
 
     private void AllowNextCollision()

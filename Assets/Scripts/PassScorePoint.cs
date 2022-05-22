@@ -7,5 +7,6 @@ public class PassScorePoint : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         GameManager.instance.AddScore(1);
+        FindObjectOfType<BallController>().perfectPass++;
     }
 }
